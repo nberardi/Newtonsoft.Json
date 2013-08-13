@@ -27,7 +27,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
 using System.Dynamic;
 #endif
 using System.Diagnostics;
@@ -148,13 +148,13 @@ namespace Newtonsoft.Json.Serialization
           JsonDictionaryContract dictionaryContract = (JsonDictionaryContract) valueContract;
           SerializeDictionary(writer, (value is IDictionary) ? (IDictionary) value : dictionaryContract.CreateWrapper(value), dictionaryContract, member, containerContract, containerProperty);
           break;
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
         case JsonContractType.Dynamic:
           SerializeDynamic(writer, (IDynamicMetaObjectProvider)value, (JsonDynamicContract)valueContract, member, containerContract, containerProperty);
           break;
 #endif
 #if !(SILVERLIGHT || NETFX_CORE || PORTABLE40 || PORTABLE)
-        case JsonContractType.Serializable:
+		case JsonContractType.Serializable:
           SerializeISerializable(writer, (ISerializable)value, (JsonISerializableContract)valueContract, member, containerContract, containerProperty);
           break;
 #endif
@@ -710,7 +710,7 @@ To fix this error either change the environment to be fully trusted, change the 
     }
 #endif
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     private void SerializeDynamic(JsonWriter writer, IDynamicMetaObjectProvider value, JsonDynamicContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
     {
       OnSerializing(writer, contract, value);
@@ -787,7 +787,7 @@ To fix this error either change the environment to be fully trusted, change the 
     }
 #endif
 
-    private bool ShouldWriteDynamicProperty(object memberValue)
+	private bool ShouldWriteDynamicProperty(object memberValue)
     {
       if (Serializer._nullValueHandling == NullValueHandling.Ignore && memberValue == null)
         return false;

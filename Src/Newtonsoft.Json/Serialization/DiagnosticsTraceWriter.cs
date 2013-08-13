@@ -1,4 +1,4 @@
-﻿#if !(SILVERLIGHT || PORTABLE40 || PORTABLE || NETFX_CORE)
+﻿#if !(SILVERLIGHT || PORTABLE40 || PORTABLE || NETFX_CORE || XAMARINIOS)
 using System;
 using System.Diagnostics;
 using DiagnosticsTrace = System.Diagnostics.Trace;

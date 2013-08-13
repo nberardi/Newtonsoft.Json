@@ -30,7 +30,7 @@ using System.Collections.Concurrent;
 #endif
 using System.Collections.Generic;
 using System.ComponentModel;
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
 using System.Dynamic;
 #endif
 using System.Globalization;
@@ -97,7 +97,7 @@ namespace Newtonsoft.Json.Serialization
 #if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE)
         new EntityKeyMemberConverter(),
 #endif
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
         new ExpandoObjectConverter(),
 #endif
 #if (!(SILVERLIGHT || PORTABLE40) || WINDOWS_PHONE)
@@ -804,7 +804,7 @@ namespace Newtonsoft.Json.Serialization
     }
 #endif
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     /// <summary>
     /// Creates a <see cref="JsonDynamicContract"/> for the given type.
     /// </summary>
@@ -822,7 +822,7 @@ namespace Newtonsoft.Json.Serialization
     }
 #endif
 
-    /// <summary>
+	/// <summary>
     /// Creates a <see cref="JsonStringContract"/> for the given type.
     /// </summary>
     /// <param name="objectType">Type of the object.</param>
@@ -873,13 +873,13 @@ namespace Newtonsoft.Json.Serialization
         return CreateISerializableContract(objectType);
 #endif
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
       if (typeof(IDynamicMetaObjectProvider).IsAssignableFrom(t))
         return CreateDynamicContract(objectType);
 #endif
 
 #if !(PORTABLE || NETFX_CORE)
-      // tested last because it is not possible to automatically deserialize custom IConvertible types
+	  // tested last because it is not possible to automatically deserialize custom IConvertible types
       if (IsIConvertible(t))
         return CreatePrimitiveContract(t);
 #endif

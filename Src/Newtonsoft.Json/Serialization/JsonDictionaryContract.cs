@@ -137,7 +137,7 @@ namespace Newtonsoft.Json.Serialization
       }
 #endif
 
-#if !(NET20 || NET35 || NET40 || PORTABLE40)
+#if !(NET20 || NET35 || NET40 || PORTABLE40 || XAMARINIOS)
       Type immutableCreatedType;
       MethodBase immutableParameterizedCreator;
       if (ImmutableCollectionsUtils.TryBuildImmutableForDictionaryContract(underlyingType, DictionaryKeyType, DictionaryValueType, out immutableCreatedType, out immutableParameterizedCreator))
@@ -147,7 +147,7 @@ namespace Newtonsoft.Json.Serialization
         IsReadOnlyOrFixedSize = true;
       }
 #endif
-    }
+	}
 
     internal IWrappedDictionary CreateWrapper(object dictionary)
     {

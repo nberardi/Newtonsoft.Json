@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Utilities;
 using System.Globalization;
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
 using System.Dynamic;
 using System.Linq.Expressions;
 #endif
@@ -347,7 +347,7 @@ namespace Newtonsoft.Json.Linq
       return d1.CompareTo(d2);
     }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     private static bool Operation(ExpressionType operation, object objA, object objB, out object result)
     {
       if (objA is string || objB is string)
@@ -495,7 +495,7 @@ namespace Newtonsoft.Json.Linq
     }
 #endif
 
-    internal override JToken CloneToken()
+	internal override JToken CloneToken()
     {
       return new JValue(this);
     }
@@ -802,7 +802,7 @@ namespace Newtonsoft.Json.Linq
         return _value.ToString();
     }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     /// <summary>
     /// Returns the <see cref="T:System.Dynamic.DynamicMetaObject"/> responsible for binding operations performed on this object.
     /// </summary>
@@ -883,7 +883,7 @@ namespace Newtonsoft.Json.Linq
     }
 #endif
 
-    int IComparable.CompareTo(object obj)
+	int IComparable.CompareTo(object obj)
     {
       if (obj == null)
         return 1;

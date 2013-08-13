@@ -27,7 +27,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
 using System.ComponentModel;
 using System.Dynamic;
 #endif
@@ -445,14 +445,14 @@ namespace Newtonsoft.Json.Serialization
             }
 
             return targetDictionary;
-          }
-#if !(NET35 || NET20 || PORTABLE40)
+		  }
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
         case JsonContractType.Dynamic:
           JsonDynamicContract dynamicContract = (JsonDynamicContract) contract;
           return CreateDynamic(reader, dynamicContract, member, id);
 #endif
 #if !(SILVERLIGHT || NETFX_CORE || PORTABLE40 || PORTABLE)
-        case JsonContractType.Serializable:
+		case JsonContractType.Serializable:
           JsonISerializableContract serializableContract = (JsonISerializableContract) contract;
           return CreateISerializable(reader, serializableContract, member, id);
 #endif
@@ -543,7 +543,7 @@ To fix this error either change the JSON to a {1} or change the deserialized typ
                   TraceWriter.Trace(TraceLevel.Verbose, JsonPosition.FormatMessage(reader as IJsonLineInfo, reader.Path, "Resolved type '{0}' to {1}.".FormatWith(CultureInfo.InvariantCulture, qualifiedTypeName, specifiedType)), null);
 
                 if (objectType != null
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
                     && objectType != typeof (IDynamicMetaObjectProvider)
 #endif
                     && !objectType.IsAssignableFrom(specifiedType))
@@ -673,7 +673,7 @@ To fix this error either change the JSON to a {1} or change the deserialized typ
     private bool HasNoDefinedType(JsonContract contract)
     {
       return (contract == null || contract.UnderlyingType == typeof (object) || contract.ContractType == JsonContractType.Linq
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
         || contract.UnderlyingType == typeof(IDynamicMetaObjectProvider)
 #endif
         );
@@ -1340,7 +1340,7 @@ To fix this error either change the environment to be fully trusted, change the 
     }
 #endif
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     private object CreateDynamic(JsonReader reader, JsonDynamicContract contract, JsonProperty member, string id)
     {
       IDynamicMetaObjectProvider newObject;
@@ -1428,7 +1428,7 @@ To fix this error either change the environment to be fully trusted, change the 
     }
 #endif
 
-    private object CreateObjectFromNonDefaultConstructor(JsonReader reader, JsonObjectContract contract, JsonProperty containerProperty, ConstructorInfo constructorInfo, string id)
+	private object CreateObjectFromNonDefaultConstructor(JsonReader reader, JsonObjectContract contract, JsonProperty containerProperty, ConstructorInfo constructorInfo, string id)
     {
       ValidationUtils.ArgumentNotNull(constructorInfo, "constructorInfo");
 

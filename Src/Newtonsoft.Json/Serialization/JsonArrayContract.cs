@@ -185,7 +185,7 @@ namespace Newtonsoft.Json.Serialization
       }
 #endif
 
-#if !(NET20 || NET35 || NET40 || PORTABLE40)
+#if !(NET20 || NET35 || NET40 || PORTABLE40 || XAMARINIOS)
       Type immutableCreatedType;
       MethodBase immutableParameterizedCreator;
       if (ImmutableCollectionsUtils.TryBuildImmutableForArrayContract(underlyingType, CollectionItemType, out immutableCreatedType, out immutableParameterizedCreator))
@@ -196,7 +196,7 @@ namespace Newtonsoft.Json.Serialization
         CanDeserialize = true;
       }
 #endif
-    }
+	}
 
     internal IWrappedCollection CreateWrapper(object list)
     {

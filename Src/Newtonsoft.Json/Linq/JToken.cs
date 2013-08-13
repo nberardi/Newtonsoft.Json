@@ -25,7 +25,7 @@
 
 using System;
 using System.Collections.Generic;
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
 using System.Dynamic;
 using System.Linq.Expressions;
 #endif
@@ -53,7 +53,7 @@ namespace Newtonsoft.Json.Linq
 #if !(SILVERLIGHT || NETFX_CORE || PORTABLE40 || PORTABLE)
     , ICloneable
 #endif
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     , IDynamicMetaObjectProvider
 #endif
   {
@@ -1851,7 +1851,7 @@ namespace Newtonsoft.Json.Linq
       return p.Evaluate(this, errorWhenNoMatch);
     }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     /// <summary>
     /// Returns the <see cref="T:System.Dynamic.DynamicMetaObject"/> responsible for binding operations performed on this object.
     /// </summary>
@@ -1878,7 +1878,7 @@ namespace Newtonsoft.Json.Linq
 #endif
 
 #if !(SILVERLIGHT || NETFX_CORE || PORTABLE || PORTABLE40)
-    object ICloneable.Clone()
+	object ICloneable.Clone()
     {
       return DeepClone();
     }
