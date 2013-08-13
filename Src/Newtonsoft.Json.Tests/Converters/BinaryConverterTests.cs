@@ -25,7 +25,7 @@
 
 using System;
 using System.Collections.Generic;
-#if !SILVERLIGHT && !NET20 && !NETFX_CORE
+#if !SILVERLIGHT && !NET20 && !NETFX_CORE && !XAMARINIOS
 using System.Data.Linq;
 #endif
 #if !(SILVERLIGHT || NETFX_CORE)
@@ -54,7 +54,7 @@ namespace Newtonsoft.Json.Tests.Converters
       public byte[] NullByteArray { get; set; }
     }
 
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE || PORTABLE40)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE || PORTABLE40 || XAMARINIOS)
     [Test]
     public void DeserializeBinaryClass()
     {
@@ -105,7 +105,7 @@ namespace Newtonsoft.Json.Tests.Converters
     }
 #endif
 
-    [Test]
+	[Test]
     public void SerializeByteArrayClass()
     {
       ByteArrayClass byteArrayClass = new ByteArrayClass();

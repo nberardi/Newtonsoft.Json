@@ -37,7 +37,9 @@ using System.Configuration;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters;
 using System.Threading;
+#if !XAMARINIOS
 using System.Web.Script.Serialization;
+#endif
 #endif
 using System.Text;
 using System.Text.RegularExpressions;
@@ -73,7 +75,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Specialized;
 using System.Linq.Expressions;
 #endif
-#if !(NET35 || NET20)
+#if !(NET35 || NET20 || XAMARINIOS)
 using System.Dynamic;
 using System.ComponentModel;
 #endif
@@ -243,12 +245,12 @@ namespace Newtonsoft.Json.Tests.Serialization
       serializer.TraceWriter = traceWriter;
       Assert.AreEqual(traceWriter, serializer.TraceWriter);
 
-#if !(PORTABLE || PORTABLE40 || NETFX_CORE || NET20)
+#if !(PORTABLE || PORTABLE40 || NETFX_CORE || NET20 || XAMARINIOS)
       serializer.TypeNameAssemblyFormat = FormatterAssemblyStyle.Full;
       Assert.AreEqual(FormatterAssemblyStyle.Full, serializer.TypeNameAssemblyFormat);
 #endif
 
-      serializer.TypeNameHandling = TypeNameHandling.All;
+	  serializer.TypeNameHandling = TypeNameHandling.All;
       Assert.AreEqual(TypeNameHandling.All, serializer.TypeNameHandling);
     }
 
@@ -335,12 +337,12 @@ namespace Newtonsoft.Json.Tests.Serialization
       settings.TraceWriter = traceWriter;
       Assert.AreEqual(traceWriter, settings.TraceWriter);
 
-#if !(PORTABLE || PORTABLE40 || NETFX_CORE || NET20)
+#if !(PORTABLE || PORTABLE40 || NETFX_CORE || NET20 || XAMARINIOS)
       settings.TypeNameAssemblyFormat = FormatterAssemblyStyle.Full;
       Assert.AreEqual(FormatterAssemblyStyle.Full, settings.TypeNameAssemblyFormat);
 #endif
 
-      settings.TypeNameHandling = TypeNameHandling.All;
+	  settings.TypeNameHandling = TypeNameHandling.All;
       Assert.AreEqual(TypeNameHandling.All, settings.TypeNameHandling);
     }
 
@@ -427,12 +429,12 @@ namespace Newtonsoft.Json.Tests.Serialization
       serializerProxy.TraceWriter = traceWriter;
       Assert.AreEqual(traceWriter, serializerProxy.TraceWriter);
 
-#if !(PORTABLE || PORTABLE40 || NETFX_CORE || NET20)
+#if !(PORTABLE || PORTABLE40 || NETFX_CORE || NET20 || XAMARINIOS)
       serializerProxy.TypeNameAssemblyFormat = FormatterAssemblyStyle.Full;
       Assert.AreEqual(FormatterAssemblyStyle.Full, serializerProxy.TypeNameAssemblyFormat);
 #endif
 
-      serializerProxy.TypeNameHandling = TypeNameHandling.All;
+	  serializerProxy.TypeNameHandling = TypeNameHandling.All;
       Assert.AreEqual(TypeNameHandling.All, serializerProxy.TypeNameHandling);
     }
 
@@ -1264,7 +1266,7 @@ keyword such as type of business.""
     {
       string json = @"[""vvv\/vvv\tvvv\""vvv\bvvv\nvvv\rvvv\\vvv\fvvv""]";
 
-#if !SILVERLIGHT && !NETFX_CORE
+#if !SILVERLIGHT && !NETFX_CORE && !XAMARINIOS
       JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
       List<string> javaScriptSerializerResult = javaScriptSerializer.Deserialize<List<string>>(json);
 #endif
@@ -1276,7 +1278,7 @@ keyword such as type of business.""
 
       Assert.AreEqual(1, jsonNetResult.Count);
       Assert.AreEqual(dataContractResult[0], jsonNetResult[0]);
-#if !SILVERLIGHT && !NETFX_CORE
+#if !SILVERLIGHT && !NETFX_CORE && !XAMARINIOS
       Assert.AreEqual(javaScriptSerializerResult[0], jsonNetResult[0]);
 #endif
     }
@@ -2384,7 +2386,7 @@ keyword such as type of business.""
       Assert.AreEqual("titleId", n.FidOrder[n.FidOrder.Count - 1]);
     }
 
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE || PORTABLE40)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE || PORTABLE40 || XAMARINIOS)
     [MetadataType(typeof(OptInClassMetadata))]
     public class OptInClass
     {
@@ -2432,7 +2434,7 @@ keyword such as type of business.""
 #endif
 
 #if !NET20
-    [DataContract]
+	[DataContract]
     public class DataContractPrivateMembers
     {
       public DataContractPrivateMembers()
@@ -2935,7 +2937,7 @@ Path '', line 1, position 1.",
         });
     }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     [Test]
     public void CannotDeserializeArrayIntoDynamic()
     {
@@ -2952,7 +2954,7 @@ Path '', line 1, position 1.",
     }
 #endif
 
-    [Test]
+	[Test]
     public void CannotDeserializeArrayIntoLinqToJson()
     {
       string json = @"[]";
@@ -5164,7 +5166,7 @@ To fix this error either change the environment to be fully trusted, change the 
 }", json);
     }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     [Test]
     public void SerializeExpandoObject()
     {
@@ -5204,7 +5206,7 @@ To fix this error either change the environment to be fully trusted, change the 
     }
 #endif
 
-    [Test]
+	[Test]
     public void DeserializeDecimalExact()
     {
       decimal d = JsonConvert.DeserializeObject<decimal>("123456789876543.21");
@@ -6917,7 +6919,7 @@ Parameter name: value",
     }
 #endif
 
-#if !(SILVERLIGHT || NETFX_CORE)
+#if !(SILVERLIGHT || NETFX_CORE || XAMARINIOS)
     [Test]
     public void MetroBlogPost()
     {
@@ -6999,7 +7001,7 @@ Parameter name: value",
     }
 #endif
 
-    private class FooBar
+	private class FooBar
     {
       public DateTimeOffset Foo { get; set; }
     }
@@ -9150,7 +9152,7 @@ Parameter name: value",
       Assert.AreEqual(jane, john.Spouse);
     }
 
-#if !(NETFX_CORE || NET35 || NET20 || PORTABLE || PORTABLE40)
+#if !(NETFX_CORE || NET35 || NET20 || PORTABLE || PORTABLE40 || XAMARINIOS)
     [TypeConverter(typeof(MyInterfaceConverter))]
     internal interface IMyInterface
     {

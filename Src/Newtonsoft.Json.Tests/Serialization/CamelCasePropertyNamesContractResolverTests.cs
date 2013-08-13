@@ -177,7 +177,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 }", json);
     }
 
-#if !(NET35 || NET20 || PORTABLE40)
+#if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
     [Test]
     public void DynamicCamelCasePropertyNames()
     {
@@ -201,7 +201,7 @@ namespace Newtonsoft.Json.Tests.Serialization
     }
 #endif
 
-    [Test]
+	[Test]
     public void DictionaryCamelCasePropertyNames()
     {
       Dictionary<string, string> values = new Dictionary<string, string>

@@ -887,9 +887,9 @@ keyword such as type of business.""
       json = @"/* blah */ ['hi!']";
       JArray a = JArray.Parse(json);
       Assert.AreEqual("hi!", (string)a[0]);
-    }
+	}
 
-#if !(NET35 || NET20 || WINDOWS_PHONE)
+#if !(NET35 || NET20 || WINDOWS_PHONE || XAMARINIOS)
     [Test]
     public void ExceptionFromOverloadWithJValue()
     {

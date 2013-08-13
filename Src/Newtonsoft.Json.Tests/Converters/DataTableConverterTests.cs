@@ -23,7 +23,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-#if !(SILVERLIGHT || NETFX_CORE || PORTABLE || PORTABLE40)
+#if !(SILVERLIGHT || NETFX_CORE || PORTABLE || PORTABLE40 || XAMARINIOS)
 using System;
 using System.Collections.Generic;
 #if !NETFX_CORE

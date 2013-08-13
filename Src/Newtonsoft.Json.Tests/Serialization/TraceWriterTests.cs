@@ -37,7 +37,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   [TestFixture]
   public class TraceWriterTests : TestFixtureBase
   {
-#if !(SILVERLIGHT || PORTABLE || NETFX_CORE || PORTABLE40)
+#if !(SILVERLIGHT || PORTABLE || NETFX_CORE || PORTABLE40 || XAMARINIOS)
     [Test]
     public void DiagnosticsTraceWriterTest()
     {
@@ -70,7 +70,7 @@ Newtonsoft.Json Error: 0 : Error!
     }
 #endif
 
-    [Test]
+	  [Test]
     public void MemoryTraceWriterSerializeTest()
     {
       Staff staff = new Staff();

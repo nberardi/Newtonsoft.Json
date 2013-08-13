@@ -25,7 +25,7 @@
 
 using System;
 using System.Collections.Generic;
-#if !SILVERLIGHT && !NET20 && !NETFX_CORE
+#if !SILVERLIGHT && !NET20 && !NETFX_CORE && !XAMARINIOS
 using System.Data.Linq;
 #endif
 #if !SILVERLIGHT && !NETFX_CORE
