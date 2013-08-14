@@ -63,7 +63,7 @@ namespace Newtonsoft.Json.Serialization
     public const string SpecifiedPostfix = "Specified";
 
     private static readonly ThreadSafeStore<object, Type> JsonConverterTypeCache = new ThreadSafeStore<object, Type>(GetJsonConverterTypeFromAttribute);
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE || XAMARINIOS)
     private static readonly ThreadSafeStore<Type, Type> AssociatedMetadataTypesCache = new ThreadSafeStore<Type, Type>(GetAssociateMetadataTypeFromAttribute);
 
     private const string MetadataTypeAttributeTypeName =
@@ -88,7 +88,7 @@ namespace Newtonsoft.Json.Serialization
     }
 #endif
 
-    public static JsonContainerAttribute GetJsonContainerAttribute(Type type)
+	public static JsonContainerAttribute GetJsonContainerAttribute(Type type)
     {
       return CachedAttributeGetter<JsonContainerAttribute>.GetAttribute(type);
     }
@@ -233,7 +233,7 @@ namespace Newtonsoft.Json.Serialization
     }
 #endif
 
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE || XAMARINIOS)
     private static Type GetAssociatedMetadataType(Type type)
     {
       return AssociatedMetadataTypesCache.Get(type);
@@ -274,11 +274,11 @@ namespace Newtonsoft.Json.Serialization
     }
 #endif
 
-    private static T GetAttribute<T>(Type type) where T : Attribute
+	private static T GetAttribute<T>(Type type) where T : Attribute
     {
       T attribute;
 
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE || XAMARINIOS)
       Type metadataType = GetAssociatedMetadataType(type);
       if (metadataType != null)
       {
@@ -288,7 +288,7 @@ namespace Newtonsoft.Json.Serialization
       }
 #endif
 
-      attribute = ReflectionUtils.GetAttribute<T>(type, true);
+	  attribute = ReflectionUtils.GetAttribute<T>(type, true);
       if (attribute != null)
         return attribute;
 
@@ -306,7 +306,7 @@ namespace Newtonsoft.Json.Serialization
     {
       T attribute;
 
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE || XAMARINIOS)
       Type metadataType = GetAssociatedMetadataType(memberInfo.DeclaringType);
       if (metadataType != null)
       {
@@ -321,7 +321,7 @@ namespace Newtonsoft.Json.Serialization
       }
 #endif
 
-      attribute = ReflectionUtils.GetAttribute<T>(memberInfo, true);
+	  attribute = ReflectionUtils.GetAttribute<T>(memberInfo, true);
       if (attribute != null)
         return attribute;
 

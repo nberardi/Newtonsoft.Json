@@ -94,7 +94,7 @@ namespace Newtonsoft.Json.Serialization
     }
     private static readonly IList<JsonConverter> BuiltInConverters = new List<JsonConverter>
       {
-#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE)
+#if !(SILVERLIGHT || NET20 || NETFX_CORE || PORTABLE40 || PORTABLE || XAMARINIOS)
         new EntityKeyMemberConverter(),
 #endif
 #if !(NET35 || NET20 || PORTABLE40 || XAMARINIOS)
@@ -103,7 +103,7 @@ namespace Newtonsoft.Json.Serialization
 #if (!(SILVERLIGHT || PORTABLE40) || WINDOWS_PHONE)
         new XmlNodeConverter(),
 #endif
-#if !(SILVERLIGHT || NETFX_CORE || PORTABLE40 || PORTABLE)
+#if !(SILVERLIGHT || NETFX_CORE || PORTABLE40 || PORTABLE || XAMARINIOS)
         new BinaryConverter(),
         new DataSetConverter(),
         new DataTableConverter(),
