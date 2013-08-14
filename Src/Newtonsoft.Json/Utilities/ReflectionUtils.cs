@@ -893,7 +893,7 @@ namespace Newtonsoft.Json.Utilities
       bool isMethodOverriden = currentType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
         .Any(info =>
              info.Name == method &&
-               // check that the method overrides the original on DynamicObjectProxy
+               // check that the method overrides the original on ObjectProxy
              info.DeclaringType != methodDeclaringType
              && info.GetBaseDefinition().DeclaringType == methodDeclaringType
         );

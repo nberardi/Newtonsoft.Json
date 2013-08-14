@@ -1013,12 +1013,12 @@ namespace Newtonsoft.Json.Serialization
       // warning - this method use to cause errors with Intellitrace. Retest in VS Ultimate after changes
       IValueProvider valueProvider;
 
-#if !(SILVERLIGHT || PORTABLE40 || PORTABLE || NETFX_CORE)
+#if !(SILVERLIGHT || PORTABLE40 || PORTABLE || NETFX_CORE || XAMARINIOS)
       if (DynamicCodeGeneration)
         valueProvider = new DynamicValueProvider(member);
       else
         valueProvider = new ReflectionValueProvider(member);
-#elif !(PORTABLE40)
+#elif !(PORTABLE40 || XAMARINIOS)
       valueProvider = new ExpressionValueProvider(member);
 #else
       valueProvider = new ReflectionValueProvider(member);

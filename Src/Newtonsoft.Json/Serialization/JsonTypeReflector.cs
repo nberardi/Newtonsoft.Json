@@ -433,12 +433,12 @@ namespace Newtonsoft.Json.Serialization
     {
       get
       {
-#if !(SILVERLIGHT || PORTABLE40 || PORTABLE || NETFX_CORE)
+#if !(SILVERLIGHT || PORTABLE40 || PORTABLE || NETFX_CORE || XAMARINIOS)
         if (DynamicCodeGeneration)
           return DynamicReflectionDelegateFactory.Instance;
 
         return LateBoundReflectionDelegateFactory.Instance;
-#elif !(PORTABLE40)
+#elif !(PORTABLE40 || XAMARINIOS)
         return ExpressionReflectionDelegateFactory.Instance;
 #else
         return LateBoundReflectionDelegateFactory.Instance;
